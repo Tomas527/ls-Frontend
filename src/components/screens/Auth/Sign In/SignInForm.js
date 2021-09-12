@@ -6,6 +6,7 @@ import Spacer from "components/common/Spacer";
 import BasicInput from "components/common/Input/BasicInput";
 import PasswordInput from "components/common/Input/PasswordInput";
 import BasicButton from "components/common/Button/BasicButton";
+import { EMAIL_PLACEHOLDER, PASSWORD_PLACEHOLDER, SIGN_IN } from "Constants";
 
 const SignInForm = () => {
   const [email, setEmail] = useState("");
@@ -15,17 +16,17 @@ const SignInForm = () => {
     <AuthCard>
       <Spacer />
       <BasicInput
-        placeholder="Email"
+        placeholder={EMAIL_PLACEHOLDER}
         onChange={(val) => setEmail(val)}
         // validateEmail={true}
       />
       <PasswordInput
-        placeholder="Password"
+        placeholder={PASSWORD_PLACEHOLDER}
         onChange={(val) => setPassword(val)}
         // validatePassword={true}
       />
       <BasicButton
-        text="Sign In"
+        text={SIGN_IN}
         onClick={onSubmit}
         isDisabled={!formIsValid()}
       />
