@@ -1,36 +1,34 @@
 import React, { useState } from "react";
-import { TextField, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import "./SignInForm.css";
 import AuthCard from "components/common/AuthCard/AuthCard";
 import Spacer from "components/common/Spacer";
+import BasicInput from "components/common/Input/BasicInput";
+import PasswordInput from "components/common/Input/PasswordInput";
+import BasicButton from "components/common/Button/BasicButton";
 
 const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   return (
     <AuthCard>
       <Spacer />
-      <TextField
-        className="inputStyle"
-        id="standard-basic"
-        label="Email"
-        onChange={(e) => setEmail(e.target.value)}
+      <BasicInput
+        placeholder="Email"
+        onChange={(val) => setEmail(val)}
+        // validateEmail={true}
       />
-      <TextField
-        className="inputStyle"
-        id="standard-password-input"
-        label="Password"
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
+      <PasswordInput
+        placeholder="Password"
+        onChange={(val) => setPassword(val)}
+        // validatePassword={true}
       />
-      <Button
-        className="submitButtonStyle"
-        variant="contained"
-        color="primary"
+      <BasicButton
+        text="Sign In"
         onClick={onSubmit}
-      >
-        Sign In
-      </Button>
+        isDisabled={!formIsValid()}
+      />
       <Button color="primary" className="forgotPasswordButtonStyle">
         Forgot password?
       </Button>
@@ -39,6 +37,13 @@ const SignInForm = () => {
   function onSubmit() {
     console.log(email);
     console.log(password);
+  }
+  function formIsValid() {
+    if (email === "" || password === "") {
+      return false;
+    } else {
+      return true;
+    }
   }
 };
 
