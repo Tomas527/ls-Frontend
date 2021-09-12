@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
 import "./SignInForm.css";
-import AuthCard from "../../common/AuthCard/AuthCard";
-import Spacer from "../../common/Spacer";
+import AuthCard from "components/common/AuthCard/AuthCard";
+import Spacer from "components/common/Spacer";
 
 const SignInForm = () => {
   const [email, setEmail] = useState("");

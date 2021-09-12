@@ -1,8 +1,4 @@
-.header {
-  padding: 20px;
-}
-
-.pageStyle {
+.viewStyle {
   display: flex;
   justify-content: space-evenly;
   flex-flow: column;

@@ -1,14 +1,16 @@
 import React from "react";
 import "./AuthSwitch.css";
-import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import Spacer from "../Spacer";
 
-const AuthSwitch = () => {
+const AuthSwitch = ({ isSignInMode }) => {
   return (
     <div className="switchStyle">
-      <div>Don't have an account?</div>
-      <Button style={{ textTransform: "none" }} color="primary">
-        Sign Up
-      </Button>
+      <div>{isSignInMode ? "Don't have an account?" : "Have an account?"}</div>
+      <Spacer />
+      <Link to={isSignInMode ? "/signup" : "/"}>
+        {isSignInMode ? "Sign Up" : "Sign In"}
+      </Link>
     </div>
   );
 };

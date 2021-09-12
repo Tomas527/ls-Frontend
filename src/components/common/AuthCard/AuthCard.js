@@ -6,7 +6,7 @@ const AuthCard = (props) => {
     <div className="cardStyle">
       <div className="userIcon">
         <button className="mini compact ui blue circular icon button">
-          <i class="add icon"></i>
+          <i className="add icon"></i>
         </button>
       </div>
       <div className="formStyle">{props.children}</div>

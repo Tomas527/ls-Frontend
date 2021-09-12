@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { FormControl, Select } from "@material-ui/core";
-import "./LanguageSelector.css";
 
-const LanguageSelector = (props) => {
+const LanguageSelector = ({ onChange }) => {
   const [value, setValue] = useState("En");
   return (
     <div
@@ -11,10 +10,14 @@ const LanguageSelector = (props) => {
         justifyContent: "flex-end",
       }}
     >
-      <FormControl variant="standard" className="formControl">
+      <FormControl
+        variant="outlined"
+        color="primary"
+        style={{ backgroundColor: "white" }}
+      >
         <Select
           native
-          label={value}
+          value={value}
           onChange={(e) => handleChange(e.target.value)}
         >
           <option value="En">En</option>
@@ -26,7 +29,7 @@ const LanguageSelector = (props) => {
 
   function handleChange(newValue) {
     setValue(newValue);
-    props.onChange(newValue);
+    onChange(newValue);
   }
 };
 

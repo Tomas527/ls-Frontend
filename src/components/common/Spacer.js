@@ -1,9 +1,7 @@
 import React from "react";
 
-const Spacer = (props) => {
-  const { height } = props;
-
-  return <div style={{ height: height ?? 20 }} />;
+const Spacer = ({ height, width }) => {
+  return <div style={{ height: height ?? 20, width: width ?? 5 }} />;
 };
 
 export default Spacer;
