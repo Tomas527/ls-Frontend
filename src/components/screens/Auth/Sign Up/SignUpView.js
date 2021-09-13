@@ -4,10 +4,11 @@ import SignUpForm from "./SignUpForm";
 import Spacer from "components/common/Spacer";
 import LanguageSelector from "components/common/LanguageSelector";
 import "components/screens/Auth/AuthViewStyle.css";
+import TOUButton from "components/common/Button/TOUButton";
 
 const SignUpView = () => {
   return (
-    <div className="viewStyle">
+    <div className="viewStyle" style={{ height: 1000 }}>
       <h1>Sign Up</h1>
       <div>
         <LanguageSelector
@@ -20,6 +21,11 @@ const SignUpView = () => {
         <Spacer />
         <AuthSwitch isSignInMode={false} />
       </div>
+      <TOUButton
+        onClick={() =>
+          console.log("show user our terms of use and privacy policy")
+        }
+      />
     </div>
   );
 };

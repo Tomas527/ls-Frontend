@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
 import { emailIsValid } from "./Validations";
+import "./InputStyle.css";
 
-const BasicInput = ({ placeholder, onChange, validateEmail }) => {
+const BasicInput = ({ placeholder, onChange, validateEmail, isRequired }) => {
   const [inputValue, setInputValue] = useState("");
   return (
     <TextField
-      //we want to show error if the input is not valid
+      required={isRequired}
       error={validateEmail ? !emailIsValid(inputValue) : false}
-      style={{ width: 380 }}
+      className="basicInputStyle"
       id="standard-basic"
       label={placeholder}
       value={inputValue}

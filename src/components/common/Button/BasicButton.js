@@ -5,7 +5,7 @@ import "./BasicButton.css";
 const BasicButton = ({ text, onClick, isDisabled }) => {
   return (
     <Button
-      className="buttonStyle"
+      className="basicButtonStyle"
       variant="contained"
       color="primary"
       onClick={onClick}

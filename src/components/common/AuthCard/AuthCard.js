@@ -9,7 +9,15 @@ const AuthCard = (props) => {
           <i className="add icon"></i>
         </button>
       </div>
-      <div className="formStyle">{props.children}</div>
+      <div
+        className="formStyle"
+        style={{
+          height: props.height ?? 350,
+          alignItems: props.centerAllItems ? "center" : "flex-start",
+        }}
+      >
+        {props.children}
+      </div>
     </div>
   );
 };

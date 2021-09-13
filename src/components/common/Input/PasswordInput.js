@@ -7,20 +7,19 @@ import {
   InputLabel,
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import { passwordIsValid } from "./Validations";
+import "./InputStyle.css";
 
-const PasswordInput = ({ placeholder, onChange, validatePassword }) => {
+const PasswordInput = ({ placeholder, onChange, errored }) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const errorLabal = passwordIsValid(password);
+
   return (
-    <FormControl>
+    <FormControl className="basicInputStyle">
       <InputLabel htmlFor="standard-adornment-password">
         {placeholder}
       </InputLabel>
       <Input
-        error={validatePassword ? errorLabal != null : false}
-        style={{ width: 380 }}
+        error={errored}
         id="standard-adornment-password"
         value={password}
         type={showPassword ? "text" : "password"}

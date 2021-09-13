@@ -16,7 +16,7 @@ export function emailIsValid(email) {
   return regExp.test(String(email).toLowerCase());
 }
 
-export function passwordIsValid(password) {
+export function errorDescriptionForPassword(password) {
   if (password == null || password === "") {
     return null;
   } else {

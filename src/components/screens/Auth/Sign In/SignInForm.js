@@ -1,39 +1,46 @@
 import React, { useState } from "react";
-import { Button } from "@material-ui/core";
-import "./SignInForm.css";
 import AuthCard from "components/common/AuthCard/AuthCard";
-import Spacer from "components/common/Spacer";
 import BasicInput from "components/common/Input/BasicInput";
 import PasswordInput from "components/common/Input/PasswordInput";
 import BasicButton from "components/common/Button/BasicButton";
-import { EMAIL_PLACEHOLDER, PASSWORD_PLACEHOLDER, SIGN_IN } from "Constants";
+import "./SignInForm.css";
+import {
+  PLACEHOLDER_EMAIL,
+  PLACEHOLDER_FORGOT_PASSWORD,
+  PLACEHOLDER_PASSWORD,
+  SIGN_IN,
+} from "Constants";
+import TextButton from "components/common/Button/TextButton";
 
 const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
-    <AuthCard>
-      <Spacer />
-      <BasicInput
-        placeholder={EMAIL_PLACEHOLDER}
-        onChange={(val) => setEmail(val)}
-        // validateEmail={true}
-      />
-      <PasswordInput
-        placeholder={PASSWORD_PLACEHOLDER}
-        onChange={(val) => setPassword(val)}
-        // validatePassword={true}
-      />
-      <BasicButton
-        text={SIGN_IN}
-        onClick={onSubmit}
-        isDisabled={!formIsValid()}
-      />
-      <Button color="primary" className="forgotPasswordButtonStyle">
-        Forgot password?
-      </Button>
-    </AuthCard>
+    <div className="signInFormStyle">
+      <AuthCard centerAllItems={true}>
+        <BasicInput
+          placeholder={PLACEHOLDER_EMAIL}
+          onChange={(val) => setEmail(val)}
+          // validateEmail={true}
+        />
+        <PasswordInput
+          placeholder={PLACEHOLDER_PASSWORD}
+          onChange={(val) => setPassword(val)}
+          // validatePassword={true}
+        />
+        <BasicButton
+          text={SIGN_IN}
+          onClick={onSubmit}
+          isDisabled={!formIsValid()}
+        />
+        <TextButton
+          buttonText={PLACEHOLDER_FORGOT_PASSWORD}
+          onClick={() => console.log("reset user password")}
+          blueText={true}
+        />
+      </AuthCard>
+    </div>
   );
   function onSubmit() {
     console.log(email);
