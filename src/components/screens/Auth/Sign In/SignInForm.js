@@ -12,7 +12,7 @@ import {
 } from "Constants";
 import TextButton from "components/common/Button/TextButton";
 
-const SignInForm = () => {
+const SignInForm = ({ onSubmit }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -31,7 +31,7 @@ const SignInForm = () => {
         />
         <BasicButton
           text={SIGN_IN}
-          onClick={onSubmit}
+          onClick={() => onSubmit(email, password)}
           isDisabled={!formIsValid()}
         />
         <TextButton
@@ -42,10 +42,6 @@ const SignInForm = () => {
       </AuthCard>
     </div>
   );
-  function onSubmit() {
-    console.log(email);
-    console.log(password);
-  }
   function formIsValid() {
     if (email === "" || password === "") {
       return false;

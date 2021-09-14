@@ -19,7 +19,7 @@ import {
 } from "Constants";
 import React, { useState } from "react";
 import ErrorLabel from "./components/ErrorLabel";
-const SignUpForm = () => {
+const SignUpForm = ({ onSubmit }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -73,7 +73,7 @@ const SignUpForm = () => {
         <Spacer height={1} />
         <BasicButton
           text={SIGN_UP}
-          onClick={() => console.log("submit form")}
+          onClick={() => onSubmit(firstName, lastName, email, password1)}
           isDisabled={!formIsValid()}
         />
       </AuthCard>
@@ -83,11 +83,11 @@ const SignUpForm = () => {
     if (
       firstName === "" ||
       lastName === "" ||
-      !emailIsValid(email) ||
       email === "" ||
-      passwordErrorText !== null ||
       password1 === "" ||
-      password1 !== password2
+      password1 !== password2 ||
+      passwordErrorText !== null ||
+      !emailIsValid(email)
     ) {
       return false;
     } else {

@@ -17,7 +17,7 @@ const SignInView = () => {
           }
         />
         <Spacer />
-        <SignInForm />
+        <SignInForm onSubmit={onFormSubmit} />
         <Spacer />
         <AuthSwitch isSignInMode={true} />
       </div>
@@ -28,6 +28,11 @@ const SignInView = () => {
       />
     </div>
   );
+
+  function onFormSubmit(email, password) {
+    console.log(email);
+    console.log(password);
+  }
 };
 
 export default SignInView;
