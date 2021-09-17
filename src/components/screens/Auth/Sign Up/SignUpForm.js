@@ -16,15 +16,16 @@ import {
   PLACEHOLDER_RETYPE_PASSWORD,
   SIGN_UP,
   VALIDATION_ERROR_PASSWORDS_NOT_MATCH,
-} from "Constants";
+} from "constants/uiConstants";
 import React, { useState } from "react";
-import ErrorLabel from "./components/ErrorLabel";
-const SignUpForm = ({ onSubmit }) => {
+import ErrorLabel from "components/common/ErrorLabel";
+const SignUpForm = ({ onSubmit, errorMessage }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
+  const [inputsDidChange, setInputsDidChange] = useState(false);
   const passwordErrorText = errorDescriptionForPassword(password1);
 
   return (
@@ -34,34 +35,60 @@ const SignUpForm = ({ onSubmit }) => {
         <BasicInput
           isRequired
           placeholder={PLACEHOLDER_FIRST_NAME}
-          onChange={(val) => setFirstName(val)}
+          errored={errorMessage !== undefined && !inputsDidChange}
+          onChange={(val) => {
+            if (!inputsDidChange) setInputsDidChange(true);
+            setFirstName(val);
+          }}
         />
         <BasicInput
           isRequired
           placeholder={PLACEHOLDER_LAST_NAME}
-          onChange={(val) => setLastName(val)}
+          errored={errorMessage !== undefined && !inputsDidChange}
+          onChange={(val) => {
+            if (!inputsDidChange) setInputsDidChange(true);
+            setLastName(val);
+          }}
         />
         <BasicInput
           isRequired
           placeholder={PLACEHOLDER_EMAIL}
-          onChange={(val) => setEmail(val)}
+          errored={errorMessage !== undefined && !inputsDidChange}
+          onChange={(val) => {
+            setEmail(val);
+            if (!inputsDidChange) setInputsDidChange(true);
+          }}
           validateEmail={true}
         />
         <Spacer />
         <p>{PLACEHOLDER_PASSWORD}</p>
         <PasswordInput
           placeholder={PLACEHOLDER_PASSWORD}
-          onChange={(val) => setPassword1(val)}
-          errored={passwordErrorText !== null}
+          onChange={(val) => {
+            setPassword1(val);
+            if (!inputsDidChange) setInputsDidChange(true);
+          }}
+          errored={
+            passwordErrorText !== null ||
+            (errorMessage !== undefined && !inputsDidChange)
+          }
         />
         <PasswordInput
           placeholder={PLACEHOLDER_RETYPE_PASSWORD}
-          onChange={(val) => setPassword2(val)}
-          errored={password2 !== "" && password2 !== password1}
+          onChange={(val) => {
+            setPassword2(val);
+            if (!inputsDidChange) setInputsDidChange(true);
+          }}
+          errored={
+            (password2 !== "" && password2 !== password1) ||
+            (errorMessage !== undefined && !inputsDidChange)
+          }
         />
         <ErrorLabel
           errorText={
-            passwordErrorText !== null
+            errorMessage !== undefined && !inputsDidChange
+              ? errorMessage
+              : passwordErrorText !== null
               ? passwordErrorText
               : password2 === ""
               ? null

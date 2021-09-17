@@ -3,23 +3,30 @@ import { TextField } from "@material-ui/core";
 import { emailIsValid } from "./Validations";
 import "./InputStyle.css";
 
-const BasicInput = ({ placeholder, onChange, validateEmail, isRequired }) => {
+const BasicInput = ({
+  placeholder,
+  onChange,
+  validateEmail,
+  isRequired,
+  errored,
+}) => {
   const [inputValue, setInputValue] = useState("");
   return (
     <TextField
       required={isRequired}
-      error={validateEmail ? !emailIsValid(inputValue) : false}
+      error={errored ? true : validateEmail ? !emailIsValid(inputValue) : false}
       className="basicInputStyle"
       id="standard-basic"
       label={placeholder}
       value={inputValue}
-      onChange={(e) => handleChange(e.target.value)}
+      onChange={(e) => handleChange(e)}
     />
   );
 
-  function handleChange(newValue) {
-    setInputValue(newValue);
-    onChange(newValue);
+  function handleChange(e) {
+    e.preventDefault();
+    setInputValue(e.target.value);
+    onChange(e.target.value);
   }
 };
 

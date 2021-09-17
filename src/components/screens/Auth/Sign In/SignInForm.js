@@ -9,26 +9,37 @@ import {
   PLACEHOLDER_FORGOT_PASSWORD,
   PLACEHOLDER_PASSWORD,
   SIGN_IN,
-} from "Constants";
+} from "constants/uiConstants";
 import TextButton from "components/common/Button/TextButton";
+import ErrorLabel from "components/common/ErrorLabel";
 
-const SignInForm = ({ onSubmit }) => {
+const SignInForm = ({ onSubmit, errorMessage }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [inputsDidChange, setInputsDidChange] = useState(false);
   return (
     <div className="signInFormStyle">
       <AuthCard centerAllItems={true}>
         <BasicInput
           placeholder={PLACEHOLDER_EMAIL}
-          onChange={(val) => setEmail(val)}
-          // validateEmail={true}
+          onChange={(val) => {
+            if (!inputsDidChange) setInputsDidChange(true);
+            setEmail(val);
+          }}
+          errored={errorMessage !== undefined && !inputsDidChange}
         />
         <PasswordInput
           placeholder={PLACEHOLDER_PASSWORD}
-          onChange={(val) => setPassword(val)}
-          // validatePassword={true}
+          onChange={(val) => {
+            if (!inputsDidChange) setInputsDidChange(true);
+            setPassword(val);
+          }}
+          errored={errorMessage !== undefined && !inputsDidChange}
         />
+
+        <div style={{ alignSelf: "flex-start" }}>
+          <ErrorLabel errorText={!inputsDidChange ? errorMessage : ""} />
+        </div>
         <BasicButton
           text={SIGN_IN}
           onClick={() => onSubmit(email, password)}

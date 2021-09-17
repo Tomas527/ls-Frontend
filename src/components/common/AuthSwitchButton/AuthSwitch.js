@@ -7,7 +7,7 @@ import {
   LABEL_HAVE_ACCOUNT,
   SIGN_IN,
   SIGN_UP,
-} from "Constants";
+} from "constants/uiConstants";
 
 const AuthSwitch = ({ isSignInMode }) => {
   return (

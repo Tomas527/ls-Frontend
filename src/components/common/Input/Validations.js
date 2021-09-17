@@ -5,7 +5,7 @@ import {
   VALIDATION_ERROR_SPECIAL_CHARACTER_REQUIRED,
   VALIDATION_ERROR_PASSWORD_IS_TOO_LONG,
   VALIDATION_ERROR_PASSWORD_IS_TOO_SHORT,
-} from "Constants.js";
+} from "constants/uiConstants.js";
 
 export function emailIsValid(email) {
   if (email == null || email === "") {

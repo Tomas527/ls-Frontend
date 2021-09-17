@@ -1,4 +1,4 @@
-import { BUTTON_TERMS_OF_USE } from "Constants";
+import { BUTTON_TERMS_OF_USE } from "constants/uiConstants";
 import React from "react";
 import TextButton from "./TextButton";
 
