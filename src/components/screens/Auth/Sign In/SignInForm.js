@@ -12,6 +12,7 @@ import {
 } from "constants/uiConstants";
 import TextButton from "components/common/Button/TextButton";
 import ErrorLabel from "components/common/ErrorLabel";
+import imagePlaceholder from "assets/user-icon.png";
 
 const SignInForm = ({ onSubmit, errorMessage }) => {
   const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ const SignInForm = ({ onSubmit, errorMessage }) => {
   const [inputsDidChange, setInputsDidChange] = useState(false);
   return (
     <div className="signInFormStyle">
-      <AuthCard centerAllItems={true}>
+      <AuthCard centerAllItems={true} profileImage={imagePlaceholder}>
         <BasicInput
           placeholder={PLACEHOLDER_EMAIL}
           onChange={(val) => {

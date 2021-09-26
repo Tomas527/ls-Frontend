@@ -2,18 +2,36 @@ import React from "react";
 import "./AuthCard.css";
 
 const AuthCard = (props) => {
+  const { profileImage, enableImagePicker, centerAllItems } = props;
   return (
-    <div className="cardStyle">
-      <div className="userIcon">
-        <button className="mini compact ui blue circular icon button">
+    <div className="authCardStyle">
+      <div
+        className="userIcon"
+        style={{
+          backgroundImage: `url(${profileImage})`,
+        }}
+      >
+        <label
+          id="file-upload"
+          className="mini compact ui blue circular icon button"
+          style={{ cursor: enableImagePicker ? "pointer" : "default" }}
+        >
+          {enableImagePicker ? (
+            <input
+              style={{ display: "none" }}
+              id="file-upload"
+              type="file"
+              onChange={props.onFilePicked}
+            />
+          ) : null}
           <i className="add icon"></i>
-        </button>
+        </label>
       </div>
       <div
         className="formStyle"
         style={{
           height: props.height ?? 350,
-          alignItems: props.centerAllItems ? "center" : "flex-start",
+          alignItems: centerAllItems ? "center" : "flex-start",
         }}
       >
         {props.children}

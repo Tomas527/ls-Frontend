@@ -1,0 +1,14 @@
+.dashboardStyle {
+  display: flex;
+  flex-flow: row;
+  width: 180px;
+  padding-right: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profileImage {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+}

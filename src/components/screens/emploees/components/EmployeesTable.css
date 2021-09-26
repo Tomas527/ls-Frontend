@@ -1,0 +1,11 @@
+.imageCellStyle {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.userImageStyle {
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+}

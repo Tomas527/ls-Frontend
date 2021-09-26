@@ -10,7 +10,7 @@ import { login } from "actions/auth";
 
 const SignInView = (props) => {
   return (
-    <div className="viewStyle">
+    <div className="authViewStyle">
       <h1>Sign In</h1>
       <div>
         <LanguageSelector

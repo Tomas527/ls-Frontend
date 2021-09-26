@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Router } from "react-router-dom";
 import SignInView from "components/screens/auth/sign in/SignInView";
 import SignUpView from "components/screens/auth/sign up/SignUpView";
-import EmploeeView from "components/screens/emp/EmploeeView";
+import EmploeeView from "components/screens/emploees/EmployeesView";
 import { PrivateRoute } from "router/private.route";
 import { PublicRoute } from "router/public.route";
 import { history } from "./history";
@@ -12,10 +12,8 @@ import Spinner from "components/common/Spinner";
 
 const RouterHelper = (props) => {
   useEffect(() => {
-    history.listen((location) => {
-      console.log("route change detected!");
+    history.listen(() => {
       props.dispatch(clearMessage());
-      console.log(location);
     });
   });
   return props.loading ? (

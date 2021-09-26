@@ -1,6 +1,5 @@
-.viewStyle {
+.authViewStyle {
   display: flex;
   justify-content: space-evenly;
   flex-flow: column;
-  height: 110vh;
 }

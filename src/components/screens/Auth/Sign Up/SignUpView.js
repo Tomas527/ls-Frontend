@@ -7,11 +7,12 @@ import "components/screens/auth/AuthViewStyle.css";
 import TOUButton from "components/common/Button/TOUButton";
 import { connect } from "react-redux";
 import { register } from "actions/auth";
+import translate from "i18n/translate";
 
 const SignUpView = (props) => {
   return (
-    <div className="viewStyle" style={{ height: 1000 }}>
-      <h1>Sign Up</h1>
+    <div className="authViewStyle" style={{ height: 1000 }}>
+      <h1>{translate("SIGN UP")}</h1>
       <div>
         <LanguageSelector
           onChange={(lang) =>
@@ -30,13 +31,8 @@ const SignUpView = (props) => {
       />
     </div>
   );
-  function onFormSubmit(firstName, lastName, email, password) {
-    const { dispatch } = props;
-    dispatch(register(firstName, lastName, email, password));
-    // console.log(firstName);
-    // console.log(lastName);
-    // console.log(email);
-    // console.log(password);
+  function onFormSubmit(firstName, lastName, email, password, profileImage) {
+    props.register(firstName, lastName, email, password, profileImage);
   }
 };
 
@@ -46,4 +42,4 @@ function mapStateToProps(state) {
     message,
   };
 }
-export default connect(mapStateToProps)(SignUpView);
+export default connect(mapStateToProps, { register })(SignUpView);

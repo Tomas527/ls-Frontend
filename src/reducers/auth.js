@@ -5,7 +5,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   LOADING_ON,
-} from "../actions/types";
+} from "actions/types";
 
 const user = JSON.parse(localStorage.getItem("user"));
 

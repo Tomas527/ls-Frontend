@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { FormControl, Select } from "@material-ui/core";
+import { changeLocalization } from "actions/changeLocalization";
+import { connect } from "react-redux";
 
-const LanguageSelector = ({ onChange }) => {
-  const [value, setValue] = useState("En");
+const LanguageSelector = (props) => {
   return (
     <div
       style={{
@@ -17,20 +18,28 @@ const LanguageSelector = ({ onChange }) => {
       >
         <Select
           native
-          value={value}
+          value={props.selectedLang}
           onChange={(e) => handleChange(e.target.value)}
         >
-          <option value="En">En</option>
-          <option value="He">He</option>
+          <option value="EN">EN</option>
+          <option value="HE">HE</option>
         </Select>
       </FormControl>
     </div>
   );
 
   function handleChange(newValue) {
-    setValue(newValue);
-    onChange(newValue);
+    props.changeLocalization(newValue);
   }
 };
 
-export default LanguageSelector;
+function mapStateToProps(state) {
+  const { selectedLang } = state.localizationReducer;
+  return {
+    selectedLang,
+  };
+}
+
+export default connect(mapStateToProps, { changeLocalization })(
+  LanguageSelector
+);

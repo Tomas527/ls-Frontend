@@ -9,43 +9,46 @@ import {
 } from "./types.js";
 
 import AuthService from "services/auth.service.js";
+import ProfileImageService from "services/profileImage.service";
 
 export const register =
-  (firstName, lastName, email, password) => (dispatch) => {
+  (firstName, lastName, email, password, image) => async (dispatch) => {
     dispatch({ type: LOADING_ON });
-    return AuthService.register(firstName, lastName, email, password).then(
-      (data) => {
-        dispatch({
-          type: REGISTER_SUCCESS,
-          payload: { user: data },
-        });
+    try {
+      const res = await AuthService.register(
+        firstName,
+        lastName,
+        email,
+        password
+      );
+      let file = await fetch(image).then((r) => r.blob());
+      await ProfileImageService.upload(file, res.id);
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: { user: res },
+      });
 
-        dispatch({
-          type: SET_MESSAGE,
-        });
+      dispatch({
+        type: SET_MESSAGE,
+      });
+      return res;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
 
-        return Promise.resolve();
-      },
-      (error) => {
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
+      dispatch({
+        type: REGISTER_FAIL,
+      });
 
-        dispatch({
-          type: REGISTER_FAIL,
-        });
-
-        dispatch({
-          type: SET_MESSAGE,
-          payload: message,
-        });
-
-        return Promise.reject();
-      }
-    );
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+    }
   };
 
 export const login = (email, password) => (dispatch) => {
