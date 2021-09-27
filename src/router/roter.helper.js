@@ -7,7 +7,7 @@ import { PrivateRoute } from "router/private.route";
 import { PublicRoute } from "router/public.route";
 import { history } from "./history";
 import { connect } from "react-redux";
-import { clearMessage } from "actions/message";
+import { clearMessage } from "actions/message.action";
 import Spinner from "components/common/Spinner";
 
 const RouterHelper = (props) => {
@@ -43,8 +43,7 @@ const RouterHelper = (props) => {
 };
 
 function mapStateToProps(state) {
-  const { isLoggedIn } = state.auth;
-  const { loading } = state.auth;
+  const { isLoggedIn, loading } = state.authReducer;
   return {
     isLoggedIn,
     loading,

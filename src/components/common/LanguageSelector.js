@@ -1,6 +1,6 @@
 import React from "react";
 import { FormControl, Select } from "@material-ui/core";
-import { changeLocalization } from "actions/changeLocalization";
+import { changeLocalization } from "actions/localization.action";
 import { connect } from "react-redux";
 
 const LanguageSelector = (props) => {

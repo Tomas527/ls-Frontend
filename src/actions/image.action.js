@@ -19,9 +19,9 @@ export const deleteImage = (id) => async (dispatch) => {
 export const getAllProfileImages = () => async (dispatch) => {
   try {
     const res = await ProfileImageService.getAllImages();
-
     dispatch({ type: GET_IMAGES, payload: res.data });
+    return Promise.resolve(res.data);
   } catch (err) {
-    console.log(err);
+    return Promise.reject(err);
   }
 };

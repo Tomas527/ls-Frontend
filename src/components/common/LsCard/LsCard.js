@@ -4,7 +4,7 @@ import Spacer from "../Spacer";
 import { connect } from "react-redux";
 import "./LsCard.css";
 import UserDashboard from "./UserDashboard";
-import { logout } from "actions/auth";
+import { logout } from "actions/auth.action";
 
 const LsCard = (props) => {
   const { user, isLoggedIn, profileImagesReducer } = props;
@@ -31,8 +31,7 @@ const LsCard = (props) => {
 };
 
 function mapStateToProps(state) {
-  const { isLoggedIn } = state.auth;
-  const { user } = state.auth;
+  const { isLoggedIn, user } = state.authReducer;
   const { profileImagesReducer } = state;
   return { isLoggedIn, user, profileImagesReducer };
 }

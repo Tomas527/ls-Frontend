@@ -16,15 +16,3 @@ class UserService {
 }
 
 export default new UserService();
-
-// const getPublicContent = () => {
-//   return axios.get(API_URI + "all");
-// };
-// const getWatcherBoard = () => {
-//   return axios.get(API_URI + "watcher", { headers: authHeader() });
-// };
-// const getAdminBoard = () => {
-//   return axios.get(API_URI + "admin", { headers: authHeader() });
-// };
-
-// export { getPublicContent, getWatcherBoard, getAdminBoard };

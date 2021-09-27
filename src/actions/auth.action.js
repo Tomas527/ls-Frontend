@@ -31,7 +31,7 @@ export const register =
       dispatch({
         type: SET_MESSAGE,
       });
-      return res;
+      return Promise.resolve();
     } catch (error) {
       const message =
         (error.response &&
@@ -51,38 +51,34 @@ export const register =
     }
   };
 
-export const login = (email, password) => (dispatch) => {
+export const login = (email, password) => async (dispatch) => {
   dispatch({ type: LOADING_ON });
-
-  return AuthService.login(email, password).then(
-    (data) => {
+  try {
+    await AuthService.login(email, password).then((data) => {
       dispatch({
         type: LOGIN_SUCCESS,
         payload: { user: data },
       });
 
       return Promise.resolve();
-    },
-    (error) => {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
+    });
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
 
-      dispatch({
-        type: LOGIN_FAIL,
-      });
+    dispatch({
+      type: LOGIN_FAIL,
+    });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+    dispatch({
+      type: SET_MESSAGE,
+      payload: message,
+    });
 
-      return Promise.reject();
-    }
-  );
+    return Promise.reject();
+  }
 };
 
 export const logout = () => (dispatch) => {

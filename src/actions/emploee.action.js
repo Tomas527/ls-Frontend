@@ -1,6 +1,5 @@
 import {
   GET_EMPLOYEES,
-  FIND_EMPLOYEE,
   CREATE_EMPLOYEE,
   UPDATE_EMPLOYEE,
   DELETE_EMPLOYEE,
@@ -11,8 +10,9 @@ export const getAllEmployees = () => async (dispatch) => {
   try {
     const res = await EmploeeDataService.getAll();
     dispatch({ type: GET_EMPLOYEES, payload: res.data });
+    return Promise.resolve(res.data);
   } catch (err) {
-    console.log(err);
+    return Promise.reject(err);
   }
 };
 
@@ -60,17 +60,5 @@ export const deleteEmployee = (id) => async (dispatch) => {
   } catch (err) {
     console.log(err);
     return Promise.reject(err);
-  }
-};
-
-export const findEmployeeById = (id) => async (dispatch) => {
-  try {
-    const res = await EmploeeDataService.find(id);
-    dispatch({
-      type: FIND_EMPLOYEE,
-      payload: res.data,
-    });
-  } catch (err) {
-    console.log(err);
   }
 };

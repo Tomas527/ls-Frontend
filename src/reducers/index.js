@@ -1,13 +1,13 @@
 import { combineReducers } from "redux";
-import auth from "./auth";
-import message from "./message";
-import emploeesReducer from "./emploeeReducer";
-import localizationReducer from "./localizationReducer";
-import profileImagesReducer from "./profileImagesReducer";
+import authReducer from "./auth.reducer";
+import messageReducer from "./message.reducer";
+import emploeesReducer from "./emploee.reducer";
+import localizationReducer from "./localization.reducer";
+import profileImagesReducer from "./images.reducer";
 
 export default combineReducers({
-  auth,
-  message,
+  authReducer,
+  messageReducer,
   emploeesReducer,
   profileImagesReducer,
   localizationReducer,

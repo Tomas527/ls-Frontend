@@ -6,7 +6,7 @@ import Spacer from "components/common/Spacer";
 import LanguageSelector from "components/common/LanguageSelector";
 import TOUButton from "components/common/Button/TOUButton";
 import { connect } from "react-redux";
-import { login } from "actions/auth";
+import { login } from "actions/auth.action";
 
 const SignInView = (props) => {
   return (
@@ -32,16 +32,15 @@ const SignInView = (props) => {
   );
 
   function onFormSubmit(email, password) {
-    const { dispatch } = props;
-    dispatch(login(email, password));
+    props.login(email, password);
   }
 };
 
 function mapStateToProps(state) {
-  const { message } = state.message;
+  const { message } = state.messageReducer;
   return {
     message,
   };
 }
 
-export default connect(mapStateToProps)(SignInView);
+export default connect(mapStateToProps, { login })(SignInView);

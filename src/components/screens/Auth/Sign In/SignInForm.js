@@ -9,7 +9,7 @@ import {
   PLACEHOLDER_FORGOT_PASSWORD,
   PLACEHOLDER_PASSWORD,
   SIGN_IN,
-} from "constants/uiConstants";
+} from "constants/Constants";
 import TextButton from "components/common/Button/TextButton";
 import ErrorLabel from "components/common/ErrorLabel";
 import imagePlaceholder from "assets/user-icon.png";

@@ -3,8 +3,8 @@ import {
   getAllEmployees,
   deleteEmployee,
   updateEmployee,
-} from "actions/emploee";
-import { getAllProfileImages, deleteImage } from "actions/image";
+} from "actions/emploee.action";
+import { getAllProfileImages, deleteImage } from "actions/image.action";
 import { connect } from "react-redux";
 import EmployeesTable from "./components/EmployeesTable";
 import "./EmployeesViewStyle.css";
@@ -14,10 +14,6 @@ import Spacer from "components/common/Spacer";
 class EmployeesView extends Component {
   constructor(props) {
     super(props);
-    this.handleSelection = this.handleSelection.bind(this);
-    this.startEditing = this.startEditing.bind(this);
-    this.stopEditing = this.stopEditing.bind(this);
-    this.handleHiring = this.handleHiring.bind(this);
     this.state = {
       selectedId: -1,
       editIndex: -1,
@@ -41,10 +37,6 @@ class EmployeesView extends Component {
     });
   }
 
-  startEditing = (i) => {
-    this.setState({ editIndex: i });
-  };
-
   stopEditing = () => {
     const { employees, editIndex } = this.state;
     this.props.updateEmployee(employees[editIndex]._id, employees[editIndex]);
@@ -61,12 +53,16 @@ class EmployeesView extends Component {
   };
 
   handleSelection = (id) => {
+    if (this.state.selectedId === id) {
+      return;
+    }
     this.setState({
       selectedId: id,
     });
     const selectedEmploee = this.state.employees.find(
       (employee) => employee._id === id
     );
+
     this.setState({
       disableAddEmployeeButton: selectedEmploee.isHired,
     });
@@ -81,6 +77,11 @@ class EmployeesView extends Component {
     this.setState({
       employees: updatedArr,
     });
+    if (this.state.selectedId === id) {
+      this.setState({
+        disableAddEmployeeButton: true,
+      });
+    }
   };
 
   handleHiring = (id, phone, address, roll) => {
@@ -101,7 +102,6 @@ class EmployeesView extends Component {
       let foundIndex = currentArr.findIndex(
         (emp) => emp._id === empToUpdate._id
       );
-
       currentArr[foundIndex] = empToUpdate;
       this.setState({
         employees: currentArr,
@@ -121,14 +121,12 @@ class EmployeesView extends Component {
         <Spacer height={45} />
         <EmployeesTable
           data={this.state.employees ? this.state.employees : []}
-          handleRemove={(id) => {
-            this.handleDeletion(id);
-          }}
-          startEditing={this.startEditing}
+          handleRemove={(id) => this.handleDeletion(id)}
+          startEditing={(id) => this.setState({ editIndex: id })}
           editIndex={this.state.editIndex}
-          handleRowSelection={(selectedRowId) => {
-            this.handleSelection(selectedRowId);
-          }}
+          handleRowSelection={(selectedRowId) =>
+            this.handleSelection(selectedRowId)
+          }
           highlightedId={this.state.selectedId}
           handelChange={this.handleChange}
           stopEditing={this.stopEditing}
@@ -167,7 +165,7 @@ class EmployeesView extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    loggedInUserId: state.auth.user.id,
+    loggedInUserId: state.authReducer.user.id,
     employees: state.emploeesReducer,
     employeesProfileImages: state.profileImagesReducer,
   };

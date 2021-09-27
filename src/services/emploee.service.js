@@ -2,19 +2,17 @@ import axios from "axios";
 
 const API_URI = "http://localhost:8080/api/emploees";
 class EmploeeDataService {
-  getAll() {
-    return axios.get(API_URI).then((response) => {
-      return response;
-    });
+  async getAll() {
+    const response = await axios.get(API_URI);
+    return response;
   }
 
   delete(id) {
     return axios.delete(`${API_URI}/${id}`);
   }
-  update(id, data) {
-    return axios.put(`${API_URI}/${id}`, data).then((response) => {
-      return response;
-    });
+  async update(id, data) {
+    const response = await axios.put(`${API_URI}/${id}`, data);
+    return response;
   }
   find(id) {
     return axios.get(`${API_URI}/${id}`);

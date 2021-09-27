@@ -6,7 +6,7 @@ import LanguageSelector from "components/common/LanguageSelector";
 import "components/screens/auth/AuthViewStyle.css";
 import TOUButton from "components/common/Button/TOUButton";
 import { connect } from "react-redux";
-import { register } from "actions/auth";
+import { register } from "actions/auth.action";
 import translate from "i18n/translate";
 
 const SignUpView = (props) => {
@@ -37,7 +37,7 @@ const SignUpView = (props) => {
 };
 
 function mapStateToProps(state) {
-  const { message } = state.message;
+  const { message } = state.messageReducer;
   return {
     message,
   };
