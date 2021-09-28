@@ -1,9 +1,4 @@
-import {
-  GET_EMPLOYEES,
-  CREATE_EMPLOYEE,
-  UPDATE_EMPLOYEE,
-  DELETE_EMPLOYEE,
-} from "./types";
+import { GET_EMPLOYEES, UPDATE_EMPLOYEE, DELETE_EMPLOYEE } from "./types";
 import EmploeeDataService from "services/emploee.service";
 
 export const getAllEmployees = () => async (dispatch) => {
@@ -15,26 +10,6 @@ export const getAllEmployees = () => async (dispatch) => {
     return Promise.reject(err);
   }
 };
-
-export const createEmployee =
-  (firstName, lastName, phone, address, roll) => async (dispatch) => {
-    try {
-      const res = await EmploeeDataService.create({
-        firstName,
-        lastName,
-        phone,
-        address,
-        roll,
-      });
-      dispatch({
-        type: CREATE_EMPLOYEE,
-        payload: res.data,
-      });
-      return Promise.resolve(res.data);
-    } catch (err) {
-      return Promise.reject(err);
-    }
-  };
 
 export const updateEmployee = (id, data) => async (dispatch) => {
   try {

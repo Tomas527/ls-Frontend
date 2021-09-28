@@ -3,8 +3,7 @@ import translate from "i18n/translate";
 
 const initialState = {};
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default function (state = initialState, action) {
+function messageReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case SET_MESSAGE:
@@ -23,3 +22,4 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+export default messageReducer;

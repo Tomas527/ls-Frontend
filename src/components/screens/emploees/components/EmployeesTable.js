@@ -39,6 +39,7 @@ const row = (
   handelChange,
   stopEditing,
   loggedInUserId,
+  adminMode,
   header
 ) => {
   const currentlyEditing = editIndex === index;
@@ -81,35 +82,37 @@ const row = (
           </StyledTableCell>
         )
       )}
-      <StyledTableCell align="left">
-        {
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-            }}
-          >
-            {loggedInUserId !== emploee._id && (
-              <button onClick={() => handleRemove(emploee._id)}>
-                <i className="trash alternate icon"></i>
-              </button>
-            )}
-
-            <Spacer width={10} />
-            {currentlyEditing ? (
-              <button onClick={() => stopEditing()}>
-                <i className="check icon"></i>
-              </button>
-            ) : (
-              emploee.isHired && (
-                <button onClick={() => startEditing(index)}>
-                  <i className="pencil alternate icon"></i>
+      {adminMode && (
+        <StyledTableCell align="left">
+          {
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
+              {loggedInUserId !== emploee._id && (
+                <button onClick={() => handleRemove(emploee._id)}>
+                  <i className="trash alternate icon"></i>
                 </button>
-              )
-            )}
-          </div>
-        }
-      </StyledTableCell>
+              )}
+
+              <Spacer width={10} />
+              {currentlyEditing ? (
+                <button onClick={() => stopEditing()}>
+                  <i className="check icon"></i>
+                </button>
+              ) : (
+                emploee.isHired && (
+                  <button onClick={() => startEditing(index)}>
+                    <i className="pencil alternate icon"></i>
+                  </button>
+                )
+              )}
+            </div>
+          }
+        </StyledTableCell>
+      )}
     </TableRow>
   );
 };
@@ -124,11 +127,12 @@ const EmployeesTable = ({
   handelChange,
   stopEditing,
   loggedInUserId,
+  adminMode,
   header,
 }) => {
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer sx={{ maxHeight: 440, minWidth: 1000, maxWidth: 1000 }}>
+      <TableContainer sx={{ maxHeight: 440, minWidth: 800, maxWidth: 1000 }}>
         <Table stickyHeader sx={{ maxHeight: 200 }}>
           <TableHead>
             <TableRow>
@@ -138,7 +142,7 @@ const EmployeesTable = ({
                 </StyledTableCell>
               ))}
 
-              <StyledTableCell align="left" />
+              {adminMode && <StyledTableCell align="left" />}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -154,6 +158,7 @@ const EmployeesTable = ({
                 handelChange,
                 stopEditing,
                 loggedInUserId,
+                adminMode,
                 header
               )
             )}

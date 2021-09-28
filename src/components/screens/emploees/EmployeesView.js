@@ -22,6 +22,7 @@ class EmployeesView extends Component {
       disableAddEmployeeButton: true,
     };
   }
+
   componentDidMount() {
     this.props.getAllEmployees().then(() => {
       this.props.getAllProfileImages().then(() => {
@@ -111,11 +112,13 @@ class EmployeesView extends Component {
   render() {
     return (
       <div className="employeesViewStyle">
-        <EmploeeHeader
-          buttonIsDisabled={this.state.disableAddEmployeeButton}
-          selectedEmployeeId={this.state.selectedId}
-          employeeFormSubmitted={this.handleHiring}
-        />
+        {this.props.isAdmin && (
+          <EmploeeHeader
+            buttonIsDisabled={this.state.disableAddEmployeeButton}
+            selectedEmployeeId={this.state.selectedId}
+            employeeFormSubmitted={this.handleHiring}
+          />
+        )}
         <Spacer height={45} />
         <EmployeesTable
           data={this.state.employees ? this.state.employees : []}
@@ -127,6 +130,7 @@ class EmployeesView extends Component {
           handelChange={this.handleChange}
           stopEditing={this.stopEditing}
           loggedInUserId={this.props.loggedInUserId}
+          adminMode={this.props.isAdmin}
           header={[
             {
               headerName: translate("FIRST NAME"),
@@ -161,6 +165,8 @@ class EmployeesView extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    //TODO: create a switch-case when more roles would be added
+    isAdmin: state.authReducer.user.roles[0] === "ROLE_ADMIN",
     loggedInUserId: state.authReducer.user.id,
     employees: state.emploeesReducer,
     employeesProfileImages: state.profileImagesReducer,

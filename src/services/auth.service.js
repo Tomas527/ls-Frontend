@@ -16,13 +16,13 @@ class AuthService {
     localStorage.removeItem("user");
   }
   async register(firstName, lastName, email, password) {
-    let role = "admin";
+    let roles = ["admin"];
     const response = await axios.post(API_URI + "signup", {
       firstName,
       lastName,
       email,
       password,
-      role,
+      roles,
     });
     if (response.data.accessToken) {
       localStorage.setItem("user", JSON.stringify(response.data));

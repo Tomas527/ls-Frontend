@@ -16,14 +16,15 @@ const AuthCard = (props) => {
           className="mini compact ui blue circular icon button"
           style={{ cursor: enableImagePicker ? "pointer" : "default" }}
         >
-          {enableImagePicker ? (
+          {enableImagePicker && (
             <input
               style={{ display: "none" }}
               id="file-upload"
+              accept="image/png, image/jpeg"
               type="file"
               onChange={props.onFilePicked}
             />
-          ) : null}
+          )}
           <i className="add icon"></i>
         </label>
       </div>
