@@ -14,11 +14,7 @@ const SignUpView = (props) => {
     <div className="authViewStyle" style={{ height: 1000 }}>
       <h1>{translate("SIGN UP")}</h1>
       <div>
-        <LanguageSelector
-          onChange={(lang) =>
-            console.log("user selected a new language: " + lang)
-          }
-        />
+        <LanguageSelector />
         <Spacer />
         <SignUpForm onSubmit={onFormSubmit} errorMessage={props.message} />
         <Spacer />

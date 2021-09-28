@@ -1,11 +1,4 @@
-import {
-  VALIDATION_ERROR_UPPERCASE_REQUIRED,
-  VALIDATION_ERROR_NUMBER_REQUIRED,
-  VALIDATION_ERROR_LOWERCASE_REQUIRED,
-  VALIDATION_ERROR_SPECIAL_CHARACTER_REQUIRED,
-  VALIDATION_ERROR_PASSWORD_IS_TOO_LONG,
-  VALIDATION_ERROR_PASSWORD_IS_TOO_SHORT,
-} from "constants/Constants.js";
+import translate from "i18n/translate";
 
 export function emailIsValid(email) {
   if (email == null || email === "") {
@@ -22,22 +15,22 @@ export function errorDescriptionForPassword(password) {
   } else {
     const stringPassword = String(password);
     if (!stringPassword.match("(?=.*[A-Z])")) {
-      return VALIDATION_ERROR_UPPERCASE_REQUIRED;
+      return translate("VALIDATION ERROR UPPERCASE REQUIRED");
     }
     if (!stringPassword.match("(?=.*[0-9])")) {
-      return VALIDATION_ERROR_NUMBER_REQUIRED;
+      return translate("VALIDATION ERROR NUMBER REQUIRED");
     }
     if (!stringPassword.match("(?=.*[a-z])")) {
-      return VALIDATION_ERROR_LOWERCASE_REQUIRED;
+      return translate("VALIDATION ERROR LOWERCASE REQUIRED");
     }
     if (!stringPassword.match("(?=.*[!@#$%^&*])")) {
-      return VALIDATION_ERROR_SPECIAL_CHARACTER_REQUIRED;
+      return translate("VALIDATION ERROR SPECIAL CHARACTER REQUIRED");
     }
     if (String(password).length < 6) {
-      return VALIDATION_ERROR_PASSWORD_IS_TOO_SHORT;
+      return translate("VALIDATION ERROR PASSWORD IS TOO SHORT");
     }
     if (String(password).length > 32) {
-      return VALIDATION_ERROR_PASSWORD_IS_TOO_LONG;
+      return translate("VALIDATION ERROR PASSWORD IS TOO LONG");
     }
     return null;
   }

@@ -35,5 +35,29 @@ export default {
       "Password can not be longer than 32 characters",
     "VALIDATION ERROR PASSWORDS NOT MATCH":
       "The passwords you entered does not match",
+
+    //server errors
+    "INVALID EMAIL OR PASSWORD": "Invalid Email or password",
+    "EMAIL IS ALREADY IN USE": "Email is already in use",
+    "SOMETHING WENT WRONG": "Something went wrong",
+
+    //employees header
+    "EMPLOYEES HEADER": "Manageing Employees",
+    "ADD AS EMPLOYEE BUTTON": "+ Add As Employee",
+
+    //employee dialog
+    "ADD EMPLOYEE HEADER": "Add Employee",
+    "ADD BUTTON": "Add",
+
+    //employees table
+    "FIRST NAME": "First Name",
+    "LAST NAME": "Last Name",
+    PHONE: "Phone",
+    ADDRESS: "Address",
+    ROLL: "Roll",
+    "START DATA": "Start Date",
+
+    //terms of use button
+    "BUTTON TERMS OF USE": "Our Terms of Use and Privacy Policy",
   },
 };

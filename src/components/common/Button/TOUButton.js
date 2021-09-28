@@ -1,11 +1,11 @@
-import { BUTTON_TERMS_OF_USE } from "constants/Constants";
 import React from "react";
 import TextButton from "./TextButton";
+import translate from "i18n/translate";
 
 const TOUButton = ({ onClick }) => {
   return (
     <TextButton
-      buttonText={BUTTON_TERMS_OF_USE}
+      buttonText={translate("BUTTON TERMS OF USE")}
       onClick={onClick}
       size="small"
     />

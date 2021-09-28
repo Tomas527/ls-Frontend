@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import BasicButton from "components/common/Button/BasicButton";
 import BasicInput from "components/common/Input/BasicInput";
+import translate from "i18n/translate";
 
 const AddEmployeeDialog = ({ isOpened, onSubmit, onDismiss }) => {
   const [phone, setPhone] = useState("");
@@ -14,19 +15,25 @@ const AddEmployeeDialog = ({ isOpened, onSubmit, onDismiss }) => {
   const [roll, setRoll] = useState("");
   return (
     <Dialog open={isOpened} onClose={onDismiss}>
-      <DialogTitle>Add Employee</DialogTitle>
+      <DialogTitle>{translate("ADD EMPLOYEE HEADER")}</DialogTitle>
       <DialogContent>
-        <BasicInput placeholder="Phone" onChange={(value) => setPhone(value)} />
         <BasicInput
-          placeholder="Address"
+          placeholder={translate("PHONE")}
+          onChange={(value) => setPhone(value)}
+        />
+        <BasicInput
+          placeholder={translate("ADDRESS")}
           onChange={(value) => setAddress(value)}
         />
-        <BasicInput placeholder="Roll" onChange={(value) => setRoll(value)} />
+        <BasicInput
+          placeholder={translate("ROLL")}
+          onChange={(value) => setRoll(value)}
+        />
       </DialogContent>
       <DialogActions>
         <BasicButton
           onClick={() => onSubmit(phone, address, roll)}
-          text="Add"
+          text={translate("ADD BUTTON")}
         />
       </DialogActions>
     </Dialog>

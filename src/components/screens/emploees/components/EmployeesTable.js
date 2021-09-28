@@ -44,7 +44,7 @@ const row = (
   return (
     <TableRow
       key={`rowId-${emploee._id}`}
-      onClick={() => handleRowSelection(emploee._id)}
+      onClick={(e) => handleRowSelection(emploee._id, e)}
       selected={emploee._id === highlightedId}
       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
       style={{ height: 80 }}
@@ -61,7 +61,9 @@ const row = (
             ) : y.prop === "firstName" ? (
               <div className="imageCellStyle">
                 <img
-                  src={`data:image/jpeg;base64,${emploee.profileImage.image}`}
+                  src={`data:image/jpeg;base64,${
+                    emploee.profileImage ? emploee.profileImage.image : ""
+                  }`}
                   alt=""
                   className="userImageStyle"
                 />

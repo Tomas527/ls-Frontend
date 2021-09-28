@@ -7,11 +7,12 @@ import LanguageSelector from "components/common/LanguageSelector";
 import TOUButton from "components/common/Button/TOUButton";
 import { connect } from "react-redux";
 import { login } from "actions/auth.action";
+import translate from "i18n/translate";
 
 const SignInView = (props) => {
   return (
     <div className="authViewStyle">
-      <h1>Sign In</h1>
+      <h1>{translate("SIGN IN")}</h1>
       <div>
         <LanguageSelector
           onChange={(lang) =>

@@ -4,15 +4,11 @@ import BasicInput from "components/common/Input/BasicInput";
 import PasswordInput from "components/common/Input/PasswordInput";
 import BasicButton from "components/common/Button/BasicButton";
 import "./SignInForm.css";
-import {
-  PLACEHOLDER_EMAIL,
-  PLACEHOLDER_FORGOT_PASSWORD,
-  PLACEHOLDER_PASSWORD,
-  SIGN_IN,
-} from "constants/Constants";
+
 import TextButton from "components/common/Button/TextButton";
 import ErrorLabel from "components/common/ErrorLabel";
 import imagePlaceholder from "assets/user-icon.png";
+import translate from "i18n/translate";
 
 const SignInForm = ({ onSubmit, errorMessage }) => {
   const [email, setEmail] = useState("");
@@ -22,7 +18,7 @@ const SignInForm = ({ onSubmit, errorMessage }) => {
     <div className="signInFormStyle">
       <AuthCard centerAllItems={true} profileImage={imagePlaceholder}>
         <BasicInput
-          placeholder={PLACEHOLDER_EMAIL}
+          placeholder={translate("PLACEHOLDER EMAIL")}
           onChange={(val) => {
             if (!inputsDidChange) setInputsDidChange(true);
             setEmail(val);
@@ -30,7 +26,7 @@ const SignInForm = ({ onSubmit, errorMessage }) => {
           errored={errorMessage !== undefined && !inputsDidChange}
         />
         <PasswordInput
-          placeholder={PLACEHOLDER_PASSWORD}
+          placeholder={translate("PLACEHOLDER PASSWORD")}
           onChange={(val) => {
             if (!inputsDidChange) setInputsDidChange(true);
             setPassword(val);
@@ -42,12 +38,12 @@ const SignInForm = ({ onSubmit, errorMessage }) => {
           <ErrorLabel errorText={!inputsDidChange ? errorMessage : ""} />
         </div>
         <BasicButton
-          text={SIGN_IN}
+          text={translate("SIGN IN")}
           onClick={() => onSubmit(email, password)}
           isDisabled={!formIsValid()}
         />
         <TextButton
-          buttonText={PLACEHOLDER_FORGOT_PASSWORD}
+          buttonText={translate("PLACEHOLDER FORGOT PASSWORD")}
           onClick={() => console.log("reset user password")}
           blueText={true}
         />

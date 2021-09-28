@@ -1,6 +1,7 @@
 import BasicButton from "components/common/Button/BasicButton";
 import React, { useState } from "react";
 import AddEmployeeDialog from "./AddEmployeeDialog";
+import translate from "i18n/translate";
 
 const EmployeesHeader = (props) => {
   const { buttonIsDisabled, selectedEmployeeId, employeeFormSubmitted } = props;
@@ -14,9 +15,9 @@ const EmployeesHeader = (props) => {
         justifyContent: "space-between",
       }}
     >
-      <h1>Manageing Employees</h1>
+      <h1>{translate("EMPLOYEES HEADER")}</h1>
       <BasicButton
-        text="+ Add Emploee"
+        text={translate("ADD AS EMPLOYEE BUTTON")}
         isDisabled={buttonIsDisabled}
         onClick={() => setOpen(true)}
       />

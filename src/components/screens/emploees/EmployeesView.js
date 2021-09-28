@@ -10,6 +10,7 @@ import EmployeesTable from "./components/EmployeesTable";
 import "./EmployeesViewStyle.css";
 import EmploeeHeader from "./components/EmploeeysHeader";
 import Spacer from "components/common/Spacer";
+import translate from "i18n/translate";
 
 class EmployeesView extends Component {
   constructor(props) {
@@ -52,8 +53,10 @@ class EmployeesView extends Component {
     }));
   };
 
-  handleSelection = (id) => {
-    if (this.state.selectedId === id) {
+  handleSelection = (id, e) => {
+    const tagName = e.target.tagName;
+    //when the delete icon is press the row is also selected (trash icon is on top of the row), we don't want to select a deleted row
+    if (this.state.selectedId === id || tagName === "I") {
       return;
     }
     this.setState({
@@ -77,11 +80,6 @@ class EmployeesView extends Component {
     this.setState({
       employees: updatedArr,
     });
-    if (this.state.selectedId === id) {
-      this.setState({
-        disableAddEmployeeButton: true,
-      });
-    }
   };
 
   handleHiring = (id, phone, address, roll) => {
@@ -121,39 +119,37 @@ class EmployeesView extends Component {
         <Spacer height={45} />
         <EmployeesTable
           data={this.state.employees ? this.state.employees : []}
-          handleRemove={(id) => this.handleDeletion(id)}
+          handleRemove={this.handleDeletion}
           startEditing={(id) => this.setState({ editIndex: id })}
           editIndex={this.state.editIndex}
-          handleRowSelection={(selectedRowId) =>
-            this.handleSelection(selectedRowId)
-          }
+          handleRowSelection={this.handleSelection}
           highlightedId={this.state.selectedId}
           handelChange={this.handleChange}
           stopEditing={this.stopEditing}
           loggedInUserId={this.props.loggedInUserId}
           header={[
             {
-              headerName: "First Name",
+              headerName: translate("FIRST NAME"),
               prop: "firstName",
             },
             {
-              headerName: "Last Name",
+              headerName: translate("LAST NAME"),
               prop: "lastName",
             },
             {
-              headerName: "Phone",
+              headerName: translate("PHONE"),
               prop: "phone",
             },
             {
-              headerName: "Address",
+              headerName: translate("ADDRESS"),
               prop: "address",
             },
             {
-              headerName: "Roll",
+              headerName: translate("ROLL"),
               prop: "roll",
             },
             {
-              headerName: "Start Date",
+              headerName: translate("START DATA"),
               prop: "createdAt",
             },
           ]}

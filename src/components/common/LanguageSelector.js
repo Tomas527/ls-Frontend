@@ -4,6 +4,7 @@ import { changeLocalization } from "actions/localization.action";
 import { connect } from "react-redux";
 
 const LanguageSelector = (props) => {
+  const { isHe } = props;
   return (
     <div
       style={{
@@ -18,11 +19,11 @@ const LanguageSelector = (props) => {
       >
         <Select
           native
-          value={props.selectedLang}
+          value={isHe ? "HE" : "EN"}
           onChange={(e) => handleChange(e.target.value)}
         >
-          <option value="EN">EN</option>
-          <option value="HE">HE</option>
+          <option value="EN">En</option>
+          <option value="HE">עב</option>
         </Select>
       </FormControl>
     </div>
@@ -34,9 +35,9 @@ const LanguageSelector = (props) => {
 };
 
 function mapStateToProps(state) {
-  const { selectedLang } = state.localizationReducer;
+  const { isHe } = state.localizationReducer;
   return {
-    selectedLang,
+    isHe,
   };
 }
 
