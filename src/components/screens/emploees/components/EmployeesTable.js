@@ -15,6 +15,7 @@ import { formatDate } from "utils/helperFunctions";
 import Spacer from "components/common/Spacer";
 import { TextField } from "@material-ui/core";
 import "./EmployeesTable.css";
+import "./NoStyleButton.css";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -88,22 +89,24 @@ const row = (
               flexDirection: "row",
             }}
           >
-            {loggedInUserId !== emploee._id ? (
+            {loggedInUserId !== emploee._id && (
               <button onClick={() => handleRemove(emploee._id)}>
                 <i className="trash alternate icon"></i>
               </button>
-            ) : null}
+            )}
 
             <Spacer width={10} />
             {currentlyEditing ? (
               <button onClick={() => stopEditing()}>
                 <i className="check icon"></i>
               </button>
-            ) : emploee.isHired ? (
-              <button onClick={() => startEditing(index)}>
-                <i className="pencil alternate icon"></i>
-              </button>
-            ) : null}
+            ) : (
+              emploee.isHired && (
+                <button onClick={() => startEditing(index)}>
+                  <i className="pencil alternate icon"></i>
+                </button>
+              )
+            )}
           </div>
         }
       </StyledTableCell>
