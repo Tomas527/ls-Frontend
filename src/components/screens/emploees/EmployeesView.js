@@ -46,7 +46,15 @@ class EmployeesView extends Component {
   };
 
   handleChange = (e, name, i) => {
-    const { value } = e.target;
+    let value;
+    if (e.target) {
+      //textfield change
+      value = e.target.value;
+    } else {
+      //roll change
+      value = e;
+    }
+
     this.setState((state) => ({
       employees: state.employees.map((row, j) =>
         j === i ? { ...row, [name]: value } : row
@@ -84,20 +92,24 @@ class EmployeesView extends Component {
   };
 
   handleHiring = (id, phone, address, roll) => {
+    const hiringTime = Date.now();
     var data = {
       _id: id,
       phone,
       address,
       roll,
+      startDate: hiringTime,
       isHired: true,
     };
     const currentArr = this.state.employees;
+    const dateString = Date(hiringTime);
     this.props.updateEmployee(id, data).then(() => {
       const empToUpdate = currentArr.find((emp) => emp._id === id);
       empToUpdate.phone = phone;
       empToUpdate.address = address;
       empToUpdate.roll = roll;
       empToUpdate.isHired = true;
+      empToUpdate.startDate = dateString;
       let foundIndex = currentArr.findIndex(
         (emp) => emp._id === empToUpdate._id
       );
@@ -154,7 +166,7 @@ class EmployeesView extends Component {
             },
             {
               headerName: translate("START DATA"),
-              prop: "createdAt",
+              prop: "hiredAt",
             },
           ]}
         />

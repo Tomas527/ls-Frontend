@@ -16,6 +16,7 @@ import Spacer from "components/common/Spacer";
 import { TextField } from "@material-ui/core";
 import "./EmployeesTable.css";
 import "./NoStyleButton.css";
+import RollPicker from "./RollPicker";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -52,14 +53,21 @@ const row = (
       style={{ height: 80 }}
     >
       {header.map((y, k) =>
-        y.prop !== "createdAt" ? (
+        y.prop !== "hiredAt" ? (
           <StyledTableCell key={`trc-${k}`} align="left">
-            {currentlyEditing && y.prop !== "createdAt" ? (
-              <TextField
-                name={y.prop}
-                onChange={(e) => handelChange(e, y.prop, index)}
-                value={emploee[y.prop]}
-              />
+            {currentlyEditing && y.prop !== "hiredAt" ? (
+              y.prop !== "roll" ? (
+                <TextField
+                  name={y.prop}
+                  onChange={(e) => handelChange(e, y.prop, index)}
+                  value={emploee[y.prop]}
+                />
+              ) : (
+                <RollPicker
+                  onValueChanged={(value) => handelChange(value, y.prop, index)}
+                  value={emploee.roll}
+                />
+              )
             ) : y.prop === "firstName" ? (
               <div className="imageCellStyle">
                 <img
@@ -78,7 +86,7 @@ const row = (
           </StyledTableCell>
         ) : (
           <StyledTableCell align="left" key={`trc-${header.length}`}>
-            {formatDate(emploee.createdAt)}
+            {emploee.isHired && formatDate(emploee.startDate)}
           </StyledTableCell>
         )
       )}
@@ -132,7 +140,7 @@ const EmployeesTable = ({
 }) => {
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer sx={{ maxHeight: 440, minWidth: 800, maxWidth: 1000 }}>
+      <TableContainer sx={{ maxHeight: 440, width: 1000 }}>
         <Table stickyHeader sx={{ maxHeight: 200 }}>
           <TableHead>
             <TableRow>

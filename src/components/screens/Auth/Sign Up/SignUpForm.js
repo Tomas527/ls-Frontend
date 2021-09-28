@@ -115,7 +115,6 @@ const SignUpForm = ({ onSubmit, errorMessage }) => {
               profileImage ? profileImage : imagePlaceholder
             )
           }
-          // isDisabled={false}
           isDisabled={!formIsValid()}
         />
       </AuthCard>
