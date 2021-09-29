@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Router } from "react-router-dom";
-import SignInView from "components/screens/auth/sign in/SignInView";
-import SignUpView from "components/screens/auth/sign up/SignUpView";
+import SignInView from "components/screens/auth/SignIn/SignInView";
+import SignUpView from "components/screens/auth/SignUp/SignUpView";
 import EmploeeView from "components/screens/emploees/EmployeesView";
 import { PrivateRoute } from "router/private.route";
 import { PublicRoute } from "router/public.route";
