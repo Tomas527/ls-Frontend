@@ -3,7 +3,7 @@ import AuthSwitch from "components/common/AuthSwitchButton/AuthSwitch";
 import SignUpForm from "./SignUpForm";
 import Spacer from "components/common/Spacer";
 import LanguageSelector from "components/common/LanguageSelector";
-import "components/screens/auth/AuthViewStyle.css";
+import "components/screens/Auth/AuthViewStyle.css";
 import TOUButton from "components/common/Button/TOUButton";
 import { connect } from "react-redux";
 import { register } from "actions/auth.action";
